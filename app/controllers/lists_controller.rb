@@ -37,7 +37,7 @@ class ListsController < ApplicationController
   def destroy
     List.find(params[:id]).destroy
     flash[:success] = 'List of Tasks deleted'
-    redirect_to 'index'
+    redirect_to lists_url
   end
 
   private

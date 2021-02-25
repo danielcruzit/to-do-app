@@ -6,6 +6,16 @@
 </ul>
 <ol>
       <% @lists.map do |l| %>
-             <li> <%= l.name %> </li>
+             <li> <%= l.name %> 
+                  <%# link_to see more -> need to see the tasks %>
+                 | <%= link_to  "edit",edit_list_path(l)  %> 
+                 | <%= link_to "delete", l , method: :delete,
+                 data: { confirm: "You sure?" } %>
+            </li>
+
       <% end %>
 </ol>
+
+<p>+ 
+<%= link_to "Add a List", new_list_path %>
+</p>
