@@ -4,6 +4,10 @@
     <%= f.text_field :name, class: 'form-control' %>
     <%= f.label :description %>
     <%= f.text_field :description, class: 'form-control' %>
-    <%= f.submit "Create" , class: "btn btn-primary" %>
+    <% if f.object.id.present? %>
+       <%= f.submit "Update" , class: "btn btn-primary" %>
+    <% else %>
+      <%= f.submit "Create" , class: "btn btn-primary" %>
+    <% end %>
 <% end %>
 

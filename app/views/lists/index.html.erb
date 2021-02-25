@@ -7,15 +7,56 @@
 <ol>
       <% @lists.map do |l| %>
              <li> <%= l.name %> 
-                  <%# link_to see more -> need to see the tasks %>
-                 | <%= link_to  "edit",edit_list_path(l)  %> 
-                 | <%= link_to "delete", l , method: :delete,
-                 data: { confirm: "You sure?" } %>
+                  <%= link_to "+ Add Task ", new_task_path(l) %>
+                 | <%= link_to  "edit", edit_list_path(l)  %> 
+                 | <%= button_to "Delete" ,list_path(l), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
             </li>
+            <% if l.tasks.count > 0 %>
+                  <table class= "demo" >
+                        <thead>
+                              <th style="height: 23px;">description</th>
+                              <th style="height: 23px;">completed ?</th>
+                              <th style="height: 23px;">Change state</th>
+                        </thead>
+                        <tbody>      
+                              <% l.tasks.each do |t| %>
+                              <tr>
+                                    <td><%= t.description %></td>
+                                    <td><%= t.completed %></td>
+                                    <td> Alter Completed state </td>
+                              </tr>
+                              <% end %>
+                        </tbody>
+                  </table>
+            
+            <% end %>
 
       <% end %>
 </ol>
 
-<p>+ 
-<%= link_to "Add a List", new_list_path %>
+<p>
+<%= link_to "+ Add a List", new_list_path %>
 </p>
+
+
+
+
+
+
+<style>
+      .demo {
+            border:1px solid #C0C0C0;
+            border-collsapse:collapse;
+            padding:5px;
+      }
+      .demo th {
+            border:1px solid #C0C0C0;
+            padding:5px;
+            background:#F0F0F0;
+      }
+      .demo td {
+            border:1px solid #C0C0C0;
+            padding:5px;
+            text-align: center;
+      }
+</style>
