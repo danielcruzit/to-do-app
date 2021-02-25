@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+#root 'list_of_tasks#home'
+get 'index', to: "list_of_tasks#index"
+
+resources :list_of_tasks
+
+
 end
