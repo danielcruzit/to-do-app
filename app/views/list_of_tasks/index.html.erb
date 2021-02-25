@@ -2,11 +2,10 @@
 
 <h1>All List of Tasks</h1>
 <ul class="list_of_tasks">
-     we have  <%=  @lists.count %> lists.
+      we have <%=  @lists.count %> lists.
 </ul>
-<ol>  
-      #foreaches list do 
-      <li>
-      <%= @lists.map do |l| l.name end %>
-      </li>
+<ol>
+      <% @lists.map do |l| %>
+             <li> <%= l.name %> </li>
+      <% end %>
 </ol>
