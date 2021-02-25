@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-class ListOfTasksController < ApplicationController
-  before_action :set_list_of_tasks, only: %i[edit update]
+class ListsController < ApplicationController
+  before_action :set_list, only: %i[edit update]
 
   def index
-    @lists = ListOfTasks.all
+    @lists = List.all
   end
 
   def new
-    @list = ListOfTasks.new
+    @list = List.new
   end
 
   def create
-    @list = ListOfTasks.new(list_of_tasks_params)
+    @list = List.new(list_params)
     if @list.save
       flash[:success] = 'List created whit great success!'
-      redirect_to @list
+      redirect_to lists_url
     else
       flash[:danger] = 'List got errors!'
       render 'new'
@@ -25,9 +25,9 @@ class ListOfTasksController < ApplicationController
   def edit; end
 
   def update
-    if @list.update(list_of_tasks_params)
+    if @list.update(list_params)
       flash[:success] = 'List of Tasks modified whit success!'
-      redirect_to @list
+      redirect_to lists_url
     else
       flash[:danger] = 'Modification got errors!'
       render 'edit'
@@ -35,18 +35,18 @@ class ListOfTasksController < ApplicationController
   end
 
   def destroy
-    ListOfTasks.find(params[:id]).destroy
+    List.find(params[:id]).destroy
     flash[:success] = 'List of Tasks deleted'
     redirect_to 'index'
   end
 
   private
 
-  def set_list_of_tasks
-    @list = ListOfTasks.find(params[:id])
+  def set_list
+    @list = List.find(params[:id])
   end
 
-  def list_of_tasks_params
-    params.require(:user).permit(:name, :description)
+  def list_params
+    params.require(:list).permit(:name, :description)
   end
 end

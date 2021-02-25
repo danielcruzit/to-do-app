@@ -13,7 +13,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_210_225_113_455) do
-  create_table 'list_of_tasks', force: :cascade do |t|
+  create_table 'lists', force: :cascade do |t|
     t.string 'name'
     t.string 'description'
     t.datetime 'created_at', precision: 6, null: false
