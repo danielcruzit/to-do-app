@@ -1,0 +1,31 @@
+<% provide(:title, @list.name) %>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="list_info">
+            <h1>
+                <%= @list.name %>
+                <br>
+                <%= @list.description %>
+            </h1>
+        </section>
+        <section class="list_tools">
+            <button><%= link_to "Edit", edit_list_path(@list.id) %></button>
+            <%= button_to "Delete" ,list_path(@list), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+
+        <h3>Tasks (<%= @list.tasks.count %>)</h3>
+
+        <%= link_to "+ Add a new Task",new_task_path(list_id: @list) %>
+
+        <ol class="tasks">
+            <% @list.tasks.each do |task| %>
+            <%= render "tasks/task", task: task %>
+            <%end%>
+        </ol>
+    </div>
+</div>
+
+
+
