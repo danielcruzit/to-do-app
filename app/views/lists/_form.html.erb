@@ -1,0 +1,13 @@
+<%= form_with(model: list, local: true) do |f| %>
+    <%= render 'shared/errors', object: f.object %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :description %>
+    <%= f.text_field :description, class: 'form-control' %>
+    <% if f.object.id.present? %>
+       <%= f.submit "Update" , class: "btn btn-primary" %>
+    <% else %>
+      <%= f.submit "Create" , class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
