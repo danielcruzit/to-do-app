@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[edit update]
+  before_action :set_list, only: %i[edit update show]
 
   def index
     @lists = List.all
@@ -9,6 +9,10 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+  end
+
+  def show
+    @tasks = @list.tasks
   end
 
   def create

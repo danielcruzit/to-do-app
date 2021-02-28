@@ -7,7 +7,7 @@
 <ol>
       <% @lists.map do |l| %>
              <li> <%= l.name %> 
-                  <%= link_to "Show more ", edit_list_path(l) %>
+                  <%= link_to "Show more ", list_path(l) %>
                  | <%= link_to  "edit", edit_list_path(l)  %> 
                  | <%= button_to "Delete" ,list_path(l), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
             </li>

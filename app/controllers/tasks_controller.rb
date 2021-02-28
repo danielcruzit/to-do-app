@@ -6,14 +6,16 @@ class TasksController < ApplicationController
   def index; end
 
   def new
-    @task = Task.new
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.build
   end
 
   def create
-    @task = Task.new(task_params)
+    @list = List.find(params[:task][:list_id])
+    @task = @list.tasks.build(task_params)
     if @task.save
       flash[:success] = 'Task added !'
-      redirect_to lists_url
+      redirect_to list_url(@list.id)
     else
       flash[:danger] = 'Task got errors!'
       render 'new'
@@ -22,12 +24,27 @@ class TasksController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def change_completed
+    @task.completed = !@task.completed
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      flash[:success] = 'Task updated !'
+      redirect_to list_url(@task.list_id)
+    else
+      flash[:danger] = 'Task got errors!'
+      render 'edit'
+    end
+  end
 
   def destroy
-    List.find(params[:id]).destroy
+    @task = Task.find(params[:id])
+    @list = @task.list
+    @task.destroy
     flash[:success] = 'List of Tasks deleted'
-    redirect_to lists_url
+    redirect_to list_url(@list.id)
   end
 
   private
@@ -37,6 +54,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:description, :completed)
+    params.require(:task).permit(:description, :completed, :list_id)
   end
 end

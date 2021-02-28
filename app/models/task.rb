@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  belongs_to :list, dependent: :destroy
+  # attr_accessor :list_id
+  belongs_to :list
   validates :description, presence: true, length: { maximum: 50 }
-  validates :completed, presence: true
+  validates :completed, inclusion: [true, false]
 end
