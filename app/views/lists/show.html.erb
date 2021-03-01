@@ -15,7 +15,7 @@
     </aside>
     <div class="col-md-8">
 
-        <h3>Tasks (<%= @list.tasks.count %>)</h3>
+        <h3 id="total-tasks">Tasks (<%= @list.tasks.count %>)</h3>
 
         <%= link_to "+ Add a new Task",new_task_path(list_id: @list) %>
 

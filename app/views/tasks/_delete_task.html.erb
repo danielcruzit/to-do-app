@@ -1,0 +1,4 @@
+
+<%= form_with(model: task, html: { method: :delete }, remote: true) do |f| %>
+<%= f.submit "Delete Task", class: "btn" %>
+<% end %>
