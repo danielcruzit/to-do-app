@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[edit update]
+  before_action :set_task, only: %i[edit update change_completed]
 
   def index; end
 
@@ -25,7 +25,16 @@ class TasksController < ApplicationController
   def edit; end
 
   def change_completed
-    @task.completed = !@task.completed
+    @list = @task.list
+    if @task.update(completed: !@task.completed)
+      respond_to do |format|
+        format.html { redirect_to @list }
+        format.js
+      end
+    else
+      flash[:danger] = 'Task update on complete went wrong!'
+      render @list
+    end
   end
 
   def update
@@ -44,7 +53,11 @@ class TasksController < ApplicationController
     @list = @task.list
     @task.destroy
     flash[:success] = 'List of Tasks deleted'
-    redirect_to list_url(@list.id)
+    respond_to do |format|
+      format.html { redirect_to @list }
+      format.js
+    end
+    # redirect_to list_url(@list.id)
   end
 
   private

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # get '/list', to: "list#home"
+  root "lists#index"
   resources :lists
-  resources :tasks
+  resources :tasks do 
+    member do 
+      patch :change_completed
+    end
+  end
 end
